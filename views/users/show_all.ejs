@@ -1,0 +1,44 @@
+<input type="hidden" id="currentUserId" value="<%= session.user.id %>">
+<h4>Send Message All Users Online<h4>
+<div class="col-xs-4">
+  <input type="text" class="form-control" id="txtAllMessage" placeholder="Enter Message">
+</div>
+<button type="button" class="btn btn-danger btnMessage" id="btnMessage" onClick="chatSendAllMessage()">Send Message</button>
+<hr>
+<table class="table" id="tableUsers">
+  <thead>
+    <tr>
+      <td>Online?</td>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Action</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% _.each(users, function (user) { %>
+    <tr>
+      <td>
+        <% if (user.isLoggedIn) { %>
+        <img id="imgUserLogged<%= user.id %>" src="/images/ok.png" />
+        <% } else { %>
+        <img  id="imgUserLogged<%= user.id %>" src="/images/error.png" />
+        <% } %>
+      </td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td>
+        <div id="tdUserLogged<%= user.id %>">
+        <% if (user.isLoggedIn && user.id != session.user.id) { %>
+        <div class="col-xs-8">
+          <input type="text" class="form-control" id="txtMessage<%= user.id %>" placeholder="Enter Message">
+        </div>
+        <button type="button" class="btn btn-danger btnMessage" id="btnMessage" onClick="chatSendMessage('<%= user.id %>')">Send Message</button>
+        <% } %>
+        </div>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<div id="chatUserMessage">
+<div>
