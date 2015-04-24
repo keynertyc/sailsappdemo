@@ -4,6 +4,8 @@
 
 This is an App, using [SailsJS](http://sailsjs.org)
 
+[Demo](https://sailsappdemo.herokuapp.com)
+
 Features:
 
 - Sign Up
